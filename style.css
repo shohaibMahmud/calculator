@@ -1,0 +1,31 @@
+body{
+    width: 100vw;
+}
+
+#main-container{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 8px;
+    width: 500px;
+    margin: 40px auto;
+}
+
+#display{
+    flex: 1;
+    font-size: 24px;
+    border: 2px solid black;
+    border-radius: 8px;
+    text-align: right;
+    padding-left: auto;
+    padding: 12px;
+}
+#button-container{
+    margin-top: 20px;
+    border: 2px solid;
+    display: flex;
+}
+button{
+    width: 100px;
+}
