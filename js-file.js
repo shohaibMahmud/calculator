@@ -58,6 +58,14 @@ function updateOperand(e){
     mainDisplay.textContent = operands[currentOperand];
 }
 
+function toggleSign(){
+    if (operands[currentOperand].charAt(0) == "-")
+        operands[currentOperand] = operands[currentOperand].slice(1, operands[currentOperand].length);
+    else
+        operands[currentOperand] = ("-"+operands[currentOperand]);
+    mainDisplay.textContent = operands[currentOperand];
+}
+
 document.querySelector("#clear").addEventListener("click", clear)
 
 document.querySelectorAll(".number").forEach(button=>{
@@ -68,6 +76,8 @@ document.querySelectorAll(".number").forEach(button=>{
 document.querySelectorAll(".operator").forEach(button=>{
     button.addEventListener("click", setOperator);
 });
+
+document.querySelector("#sign").addEventListener("click", toggleSign);
 
 document.querySelector("#evaluate").addEventListener("click", evaluate);
 
