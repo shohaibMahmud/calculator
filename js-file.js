@@ -22,13 +22,13 @@ function evaluate(){
     if (operate){
         const a = Number(operands[0]);
         const b = Number(operands[1]);
-        if (isNaN(a) || isNaN(b)){
-            clear();
-            mainDisplay.textContent = "Invalid operand(s):";
-        }
+        if (isNaN(a) || isNaN(b))
+            mainDisplay.textContent = "Invalid operand(s)";
         else{
             const res = operate(a, b)
+            let miniText =  miniDisplay.textContent + ` ${operands[1]}`;
             mainDisplay.textContent = res;
+            miniDisplay.textContent = miniText;
             operands[0] = res;
             operands[1] = "0"
             currentOperand = 0;
