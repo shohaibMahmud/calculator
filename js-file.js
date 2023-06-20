@@ -4,25 +4,37 @@ const miniDisplay = document.querySelector("#mini-display");
 let operands = ["0", "0"];
 let currentOperand = 0;
 let operate = null;
+let operandResult = false;
 
 clear();
 
-function clear(e=null, mainText="0", miniText="0"){
+function clear(){
     operands[0] = "0";
     operands[1] = "0";
     currentOperand = 0;
     operate = null;
-    mainDisplay.textContent = mainText;
-    miniDisplay.textContent = miniText;
+    operandResult = false;
+    mainDisplay.textContent = "0";
+    miniDisplay.textContent = "0";
 }
 
 function evaluate(){
     if (operate){
         const a = Number(operands[0]);
         const b = Number(operands[1]);
-        miniDisplay.textContent += (" "+operands[1]);
-        mainDisplay.textContent = operate(a, b);
-        clear(null, mainDisplay.textContent, miniDisplay.textContent);
+        if (isNaN(a) || isNaN(b)){
+            clear();
+            mainDisplay.textContent = "Invalid operand(s):";
+        }
+        else{
+            const res = operate(a, b)
+            mainDisplay.textContent = res;
+            operands[0] = res;
+            operands[1] = "0"
+            currentOperand = 0;
+            operandResult = true;
+            operate = null;
+        }
     }
 }
 
@@ -41,9 +53,12 @@ function divide(a,b){
 }
 
 function setOperator(e){
-    if (operate) currentOperand -= 1;
+    if (operate) evaluate();
+    
     const operator = e.target.getAttribute("id");
-    miniDisplay.textContent = operands[currentOperand]+" "+operator;
+    if (operandResult) miniDisplay.textContent += " "+operator;
+    else miniDisplay.textContent = operands[currentOperand]+" "+operator;
+    operandResult = false;
     currentOperand += 1;
     if (operator == "+") operate = add;
     else if (operator == '-') operate = subtract;
@@ -52,6 +67,7 @@ function setOperator(e){
 }
 
 function updateOperand(e){
+    if (operandResult) clear();
     const digit = e.target.getAttribute("id");
     if (operands[currentOperand]!="0" || digit==".") operands[currentOperand] += digit;
     else operands[currentOperand] = digit;
