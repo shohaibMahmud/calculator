@@ -21,10 +21,11 @@ function clear(){
 }
 
 function updateMiniDisplay(text){
-    if ((miniDisplay.textContent.length+text.length)<MINI_DIS_CHAR_LIM){
+    const miniTextLength = miniDisplay.textContent.length;
+    if ((miniTextLength+text.length)<MINI_DIS_CHAR_LIM){
         miniDisplay.textContent += text;
     }
-    else if(miniDisplay.textContent.length != MINI_DIS_CHAR_LIM){
+    else if (miniDisplay.textContent.slice(miniTextLength-2, miniTextLength) != ".."){
         const temp = (miniDisplay.textContent+text).slice(0, MINI_DIS_CHAR_LIM-3)+"...";
         miniDisplay.textContent = temp;
     }
