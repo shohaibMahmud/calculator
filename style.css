@@ -10,6 +10,7 @@ body{
     border-radius: 8px;
     width: 400px;
     margin: 40px auto;
+    background-color: aquamarine;
 }
 
 #display{
@@ -19,6 +20,8 @@ body{
     padding-left: auto;
     padding: 12px;
     box-sizing: border-box;
+    background-color: lightblue;
+    font-family: Roboto, sans-serif;
 }
 #main-display{
     font-size: 24px;
@@ -41,4 +44,22 @@ button{
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#clear{
+    width: 260px;
+    background-color: chocolate;
+}
+#evaluate{
+    width: 260px;
+    background-color: cadetblue;
+}
+.operator{
+    background-color: darkseagreen;
+}
+.number, #decimal-point, #sign{
+    background-color: darkkhaki;
+}
+#backspace{
+    background-color:chocolate;
 }
