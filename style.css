@@ -13,19 +13,21 @@ body{
 }
 
 #display{
-    flex: 1;
     border: 2px solid black;
     border-radius: 8px;
     text-align: right;
     padding-left: auto;
     padding: 12px;
+    box-sizing: border-box;
 }
 #main-display{
     font-size: 24px;
+    height: 24px;
 }
 #mini-display{
     font-size: 12px;
     text-align: left;
+    height: 12px;
 }
 #button-container{
     margin-top: 20px;

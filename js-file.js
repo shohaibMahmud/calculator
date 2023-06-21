@@ -5,6 +5,7 @@ let operands = ["0", "0"];
 let currentOperand = 0;
 let operate = null;
 let operandResult = false;
+let operandFloat = false;
 
 clear();
 
@@ -14,24 +15,26 @@ function clear(){
     currentOperand = 0;
     operate = null;
     operandResult = false;
+    operandFloat = false;
     mainDisplay.textContent = "0";
-    miniDisplay.textContent = "0";
+    miniDisplay.textContent = "";
 }
 
 function evaluate(){
     if (operate){
+        miniDisplay.textContent += ` ${operands[currentOperand]}`;
         const a = Number(operands[0]);
         const b = Number(operands[1]);
-        if (isNaN(a) || isNaN(b))
+        if (isNaN(a) || isNaN(b)){
+            clear();
             mainDisplay.textContent = "Invalid operand(s)";
+        }
         else{
             const res = operate(a, b)
-            let miniText =  miniDisplay.textContent + ` ${operands[1]}`;
             mainDisplay.textContent = res;
-            miniDisplay.textContent = miniText;
             operands[0] = res;
             operands[1] = "0"
-            currentOperand = 0;
+            currentOperand = 1;
             operandResult = true;
             operate = null;
         }
@@ -56,10 +59,17 @@ function setOperator(e){
     if (operate) evaluate();
     
     const operator = e.target.getAttribute("id");
-    if (operandResult) miniDisplay.textContent += " "+operator;
-    else miniDisplay.textContent = operands[currentOperand]+" "+operator;
+    if (operandResult) miniDisplay.textContent += ` ${operator}`;
+    else{
+        miniDisplay.textContent += `${operands[currentOperand]} ${operator}`;
+        currentOperand += 1;
+        mainDisplay.textContent = operands[currentOperand];
+    }
+    //miniDisplay.textContent += " "+operator+" 0"; //Set operand 2 to 0 by default
+    
     operandResult = false;
-    currentOperand += 1;
+    operandFloat = false;
+    
     if (operator == "+") operate = add;
     else if (operator == '-') operate = subtract;
     else if (operator == 'x') operate = multiply;
@@ -69,17 +79,62 @@ function setOperator(e){
 function updateOperand(e){
     if (operandResult) clear();
     const digit = e.target.getAttribute("id");
-    if (operands[currentOperand]!="0" || digit==".") operands[currentOperand] += digit;
-    else operands[currentOperand] = digit;
-    mainDisplay.textContent = operands[currentOperand];
+    if (operands[currentOperand]=="0" && digit !="0" ){ //operand is set to 0. So, discard any leading zero.
+        operands[currentOperand] = digit;
+        mainDisplay.textContent = digit;
+    }
+    else{
+        operands[currentOperand] += digit;
+        mainDisplay.textContent += digit;
+    }
 }
+
+/*function replaceTextInMiniDisplay(old_text_len, new_text){
+    const text_len = miniDisplay.textContent.length;
+    miniDisplay.textContent = (miniDisplay.textContent.slice(0, text_len-old_text_len)+new_text); 
+}*/
 
 function toggleSign(){
     if (operands[currentOperand].charAt(0) == "-")
         operands[currentOperand] = operands[currentOperand].slice(1, operands[currentOperand].length);
-    else
+    else if (operands[currentOperand] != "0")
         operands[currentOperand] = ("-"+operands[currentOperand]);
     mainDisplay.textContent = operands[currentOperand];
+}
+/*
+function toggleSign(){
+    if (operands[currentOperand].charAt(0) == "-"){
+        const op_len = operands[currentOperand].length;
+        operands[currentOperand] = operands[currentOperand].slice(1, op_len);
+        replaceTextInMiniDisplay(op_len, operands[currentOperand]);
+    }
+    else if (operands[currentOperand] != "0"){
+        const op_len = operands[currentOperand].length;
+        operands[currentOperand] = ("-"+operands[currentOperand]);
+        replaceTextInMiniDisplay(op_len, operands[currentOperand]);
+    }
+    mainDisplay.textContent = operands[currentOperand];
+}*/
+
+function makeFloat(){
+    if (!operandFloat){
+        operands[currentOperand] += ".";
+        mainDisplay.textContent += ".";
+    }
+}
+
+function backSpace(){
+    if (operandResult) clear();
+    else{
+        const len = operands[currentOperand].length;
+        if (len==1) operands[currentOperand] = "0";    
+        else{
+            operands[currentOperand].charAt(len-1) == "." ?
+            operandFloat = false : operandFloat = operandFloat;
+            operands[currentOperand] = operands[currentOperand].slice(0, operands[currentOperand].length-1);
+        }
+        mainDisplay.textContent = operands[currentOperand];
+    }
 }
 
 document.querySelector("#clear").addEventListener("click", clear)
@@ -97,4 +152,7 @@ document.querySelector("#sign").addEventListener("click", toggleSign);
 
 document.querySelector("#evaluate").addEventListener("click", evaluate);
 
+document.querySelector("#decimal-point").addEventListener("click", makeFloat)
+
+document.querySelector("#backspace").addEventListener("click", backSpace)
 
