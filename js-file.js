@@ -78,7 +78,7 @@ function setOperator(e){
 function updateOperand(e){
     if (operandResult) clear();
     const digit = e.target.getAttribute("id");
-    if (operands[currentOperand]=="0" && digit !="0" ){ //operand is set to 0. So, discard any leading zero.
+    if (operands[currentOperand]=="0"){ //operand is set to 0. So, discard any leading zero.
         operands[currentOperand] = digit;
         mainDisplay.textContent = digit;
     }
