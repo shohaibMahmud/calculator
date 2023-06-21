@@ -1,5 +1,5 @@
 # calculator
-This is a simple calculator implemented as the finaly project in the foundation course of TOP. In addition to the project's functionality, a minidisplay for the previous operation and a sign button were added.
+This is a simple calculator implemented as the finaly project in the foundation course of TOP. In addition to the project's functionality, a minidisplay for the previous operations and a sign button were added.
 
 1. Maximum length an operand can have is 28. Since the calculator takes input beyond the safe value supported by JS, results could be inaccurate.
 
