@@ -65,7 +65,6 @@ function setOperator(e){
         currentOperand += 1;
         mainDisplay.textContent = operands[currentOperand];
     }
-    //miniDisplay.textContent += " "+operator+" 0"; //Set operand 2 to 0 by default
     
     operandResult = false;
     operandFloat = false;
@@ -89,11 +88,6 @@ function updateOperand(e){
     }
 }
 
-/*function replaceTextInMiniDisplay(old_text_len, new_text){
-    const text_len = miniDisplay.textContent.length;
-    miniDisplay.textContent = (miniDisplay.textContent.slice(0, text_len-old_text_len)+new_text); 
-}*/
-
 function toggleSign(){
     if (operands[currentOperand].charAt(0) == "-")
         operands[currentOperand] = operands[currentOperand].slice(1, operands[currentOperand].length);
@@ -101,20 +95,6 @@ function toggleSign(){
         operands[currentOperand] = ("-"+operands[currentOperand]);
     mainDisplay.textContent = operands[currentOperand];
 }
-/*
-function toggleSign(){
-    if (operands[currentOperand].charAt(0) == "-"){
-        const op_len = operands[currentOperand].length;
-        operands[currentOperand] = operands[currentOperand].slice(1, op_len);
-        replaceTextInMiniDisplay(op_len, operands[currentOperand]);
-    }
-    else if (operands[currentOperand] != "0"){
-        const op_len = operands[currentOperand].length;
-        operands[currentOperand] = ("-"+operands[currentOperand]);
-        replaceTextInMiniDisplay(op_len, operands[currentOperand]);
-    }
-    mainDisplay.textContent = operands[currentOperand];
-}*/
 
 function makeFloat(){
     if (!operandFloat){
