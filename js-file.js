@@ -24,7 +24,7 @@ function updateMiniDisplay(text){
     if ((miniDisplay.textContent.length+text.length)<MINI_DIS_CHAR_LIM){
         miniDisplay.textContent += text;
     }
-    else{
+    else if(miniDisplay.textContent.length != MINI_DIS_CHAR_LIM){
         const temp = (miniDisplay.textContent+text).slice(0, MINI_DIS_CHAR_LIM-3)+"...";
         miniDisplay.textContent = temp;
     }
