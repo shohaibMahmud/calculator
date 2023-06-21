@@ -58,18 +58,18 @@ function evaluate(){
 }
 
 function add(a,b){
-    return (a+b).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 20});
+    return (a+b).toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 20, useGrouping: false});
 }
 function subtract(a,b){
-    return (a-b).toLocaleString({minimumFractionDigits: 0, maximumFractionDigits: 20});
+    return (a-b).toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 20, useGrouping: false});
 }
 function multiply(a,b){
-    return (a*b).toLocaleString({minimumFractionDigits: 0, maximumFractionDigits: 20});
+    return (a*b).toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 20, useGrouping: false});
 }
 function divide(a,b){
     if (a==0 && b == 0) return "Undefined";
     else if (b == 0) return "Indeterminate";
-    else return (a/b).toLocaleString({minimumFractionDigits: 0, maximumFractionDigits: 20});
+    else return (a/b).toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 20, useGrouping: false});
 }
 
 function setOperator(e){
