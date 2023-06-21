@@ -119,6 +119,7 @@ function makeFloat(){
     if (!operandFloat){
         operands[currentOperand] += ".";
         mainDisplay.textContent = operands[currentOperand];
+        operandFloat = false;
     }
 }
 
